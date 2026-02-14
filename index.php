@@ -264,6 +264,7 @@ include 'db.php';
             </div>
         <?php } ?>
     </section>
+    
     <form action="order.php" method="post">
         <div id="cart" class="cart hidden">
             <?php if (isset($_SESSION['username'])): ?>

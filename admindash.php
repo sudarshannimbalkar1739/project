@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'db.php';
 ?>
 
@@ -30,6 +31,7 @@ include 'db.php';
                 <a href="#additem">add items</a>
                 <a href="#showitems">items</a>
                 <a href="#showusr">Show users info</a>
+                
             </nav>
         </div>
     </header>

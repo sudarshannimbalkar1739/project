@@ -1,8 +1,8 @@
 <?php
-session_start();     // start session
-session_unset();     // remove all session variables
+session_start();  
+session_unset(); 
 session_destroy();
-session_abort();   // destroy session
+session_abort();   
 
 header("Location: index.php");
 exit();
