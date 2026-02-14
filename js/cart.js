@@ -5,22 +5,25 @@ function addToCart(id, name, price) {
     if (cart[name]) {
         cart[name].qty++;
     } else {
-        cart[name] = {id, name, price, qty: 1 };
+        cart[name] = { id, name, price, qty: 1 };
     }
     renderCart();
 }
 
 function changeQty(name, type) {
+    if (!cart[name]) return;
+
     if (type === "plus") {
         cart[name].qty++;
     } else {
         cart[name].qty--;
-        if (cart[id].qty <= 0) {
-            delete cart[id];
+        if (cart[name].qty <= 0) {
+            delete cart[name];
         }
     }
     renderCart();
 }
+
 
 function renderCart() {
     let cartItems = document.getElementById("cartItems");
@@ -45,9 +48,9 @@ function renderCart() {
             <div class="cart-item">
                 <span>${item.name} (₹${item.price})</span>
                 <span>
-                    <button type="button" onclick="changeQty(${id}, 'minus')">−</button>
+                <button type="button" onclick="changeQty('${item.name}', 'minus')">−</button>
                     ${item.qty}
-                    <button type="button" onclick="changeQty(${id}, 'plus')">+</button>
+                    <button type="button" onclick="changeQty('${item.name}', 'plus')">+</button>
                 </span>
             </div>
         `;
