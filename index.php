@@ -235,7 +235,6 @@ include 'db.php';
                 )">
                     Order Now
                 </button>
-
             </div>
         <?php } ?>
     </section>

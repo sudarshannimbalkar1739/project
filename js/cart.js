@@ -2,30 +2,33 @@ cart = {};
 
 function addToCart(id, name, price) {
     document.getElementById("cart").classList.remove("hidden");
-    if (cart[name]) {
-        cart[name].qty++;
+
+    if (cart[id]) {
+        cart[id].qty++;
     } else {
-        cart[name] = { id, name, price, qty: 1 };
+        cart[id] = { id, name, price, qty: 1 };
     }
+
     renderCart();
 }
 
-function changeQty(name, type) {
-    if (!cart[name]) return;
+function changeQty(id, type) {
+    if (!cart[id]) return;
 
     if (type === "plus") {
-        cart[name].qty++;
+        cart[id].qty++;
     } else {
-        cart[name].qty--;
-        if (cart[name].qty <= 0) {
-            delete cart[name];
+        cart[id].qty--;
+        if (cart[id].qty <= 0) {
+            delete cart[id];
         }
     }
+
     renderCart();
 }
 
-
 function renderCart() {
+
     let cartItems = document.getElementById("cartItems");
     let cartTotal = document.getElementById("cartTotal");
     let cartData = document.getElementById("cartData");
@@ -34,10 +37,10 @@ function renderCart() {
 
     let total = 0;
     cartItems.innerHTML = "";
-
     let output = [];
 
     for (let id in cart) {
+
         let item = cart[id];
         let itemTotal = item.price * item.qty;
         total += itemTotal;
@@ -48,9 +51,9 @@ function renderCart() {
             <div class="cart-item">
                 <span>${item.name} (₹${item.price})</span>
                 <span>
-                <button type="button" onclick="changeQty('${item.name}', 'minus')">−</button>
+                    <button type="button" onclick="changeQty(${item.id}, 'minus')">−</button>
                     ${item.qty}
-                    <button type="button" onclick="changeQty('${item.name}', 'plus')">+</button>
+                    <button type="button" onclick="changeQty(${item.id}, 'plus')">+</button>
                 </span>
             </div>
         `;
