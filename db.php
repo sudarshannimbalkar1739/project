@@ -42,15 +42,26 @@ CREATE TABLE IF NOT EXISTS users (
 /* ADMIN table */
 mysqli_query($conn, "
 CREATE TABLE IF NOT EXISTS admin (
-    users_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
+    admin_id INT AUTO_INCREMENT PRIMARY KEY,
+    adusername VARCHAR(100) NOT NULL,
+    ademail VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    phone VARCHAR(15),
+    phone VARCHAR(15) UNIQUE,
     address TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)
-");
+);"
+);
+
+
+$check_admin = mysqli_query($conn, "SELECT * FROM admin LIMIT 1");
+
+if (mysqli_num_rows($check_admin) == 0) {
+
+    mysqli_query($conn, "
+    INSERT INTO admin (adusername, ademail, password, phone, address) VALUES
+    ('Admin', 'admin@gmail.com', 'admin123', '1234567890', 'mallewadi')
+    ");
+}
 
 /* BREAKFAST table */
 mysqli_query($conn, "

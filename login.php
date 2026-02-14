@@ -1,14 +1,17 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 include "db.php";
 
 if (isset($_POST['login'])) {
 
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // First get user by email only
-    $sql = "SELECT * FROM users WHERE email='$email'";
+    $sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
@@ -16,26 +19,15 @@ if (isset($_POST['login'])) {
     }
 
     if (mysqli_num_rows($result) == 1) {
-
         $row = mysqli_fetch_assoc($result);
-
-        // Verify hashed password
-        if (password_verify($password, $row['password'])) {
-
-            $_SESSION['users_id'] = $row['users_id'];
-            $_SESSION['username'] = $row['username'];
-
-            header("Location: index.php");
-            exit();
-
-        } else {
-            echo "<script>alert('Wrong Password');</script>";
-            echo "<script>window.location.href='login.php';</script>";
-        }
-
+        $_SESSION['users_id'] = $row['users_id'];
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['users_id'] = $row['users_id'];
+        header("Location: index.php");
+        exit();
     } else {
-        echo "<script>alert('Email not found');</script>";
-        echo "<script>window.location.href='login.php';</script>";
+        echo "<script>window.alert('invalid Login');</script>";
+        echo "<script>window.location.href = 'index.php'</script>;";
     }
 }
 ?>
