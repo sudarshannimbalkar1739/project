@@ -322,7 +322,6 @@ nav a {
 }
 
 .card {
-    width: 300px;
     background: linear-gradient(135deg, #1b1b1b, #22222283);
     border-radius: 20px;
     padding: 20px;
