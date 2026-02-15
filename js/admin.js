@@ -14,7 +14,7 @@ window.addEventListener("scroll", () => {
     lastScrollY = currentScrollY;
 });
 
-const slogans = [  
+const slogans = [
     "hello sir ",
     "what's todays dishes",
     "Your Data, Your Rules",

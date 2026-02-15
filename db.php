@@ -2,9 +2,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-?>  
-
-
+?>
 <?php
 $host = "localhost";
 $user = "root";
@@ -37,10 +35,10 @@ CREATE TABLE IF NOT EXISTS users (
 )
 ");
 
-
-
 /* ADMIN table */
-mysqli_query($conn, "
+mysqli_query(
+    $conn,
+    "
 CREATE TABLE IF NOT EXISTS admin (
     admin_id INT AUTO_INCREMENT PRIMARY KEY,
     adusername VARCHAR(100) NOT NULL,
@@ -81,7 +79,7 @@ if (mysqli_num_rows($check_breakfast) == 0) {
     INSERT INTO breakfast (item_name, price, image) VALUES
     ('Idli', 40, 'https://cdn.pixabay.com/photo/2017/06/16/11/38/breakfast-2408818_1280.jpg'),
     ('Dosa', 60, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQACh1yWbIwNiWJOZ-8lkt9oGkf5cdMK4DV8Q&s'),
-    ('Upma', 50, 'https://t4.ftcdn.net/jpg/10/88/62/83/360_F_1088628359_6ZskzdYQNvfT1QICDXE0W9kpISi4kgS4.jpg')
+    ('Upma', 50, 'https://t4.ftcdn.net/jpg/10/88/62/83/360_F_1088628359_6ZskzdYQNvfT1QICDXE0W9kpISi4kgS4.jpg'),('Vadapav',50,'https://blog.swiggy.com/wp-content/uploads/2024/11/Image-1_mumbai-vada-pav-1024x538.png')
     ");
 }
 
@@ -94,7 +92,6 @@ CREATE TABLE IF NOT EXISTS dinner (
     image VARCHAR(255) NOT NULL
 )
 ");
-
 $check_dinner = mysqli_query($conn, "SELECT * FROM dinner LIMIT 1");
 
 if (mysqli_num_rows($check_dinner) == 0) {
@@ -103,7 +100,8 @@ if (mysqli_num_rows($check_dinner) == 0) {
     INSERT INTO dinner (item_name, price, image) VALUES
     ('Paneer Butter Masala', 180, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGC028wkik4tveqN6bcM92CbfKLl3xfMJfmg&s'),
     ('Veg Biryani', 150, 'https://i.ytimg.com/vi/Do7ZdUodDdw/maxresdefault.jpg'),
-    ('Roti Combo', 120, 'https://media.istockphoto.com/id/1150376593/photo/bread-tandoori-indian-cuisine.jpg?s=612x612&w=0&k=20&c=GGT5LN7G4zLhJTEnP_KcyvYuayi8f1nJcvQwvmj0rCM=')
+    ('Roti Combo', 120, 'https://media.istockphoto.com/id/1150376593/photo/bread-tandoori-indian-cuisine.jpg?s=612x612&w=0&k=20&c=GGT5LN7G4zLhJTEnP_KcyvYuayi8f1nJcvQwvmj0rCM='),('Kaju Masala', 200, 'https://www.cookwithmanali.com/wp-content/uploads/2021/07/Kaju-Masala-Kaju-Curry-500x500.jpg')
+     
     ");
 }
 
@@ -126,20 +124,41 @@ if (mysqli_num_rows($check_desserts) == 0) {
     INSERT INTO desserts (item_name, price, image) VALUES
     ('Gulab Jamun', 40, 'https://t4.ftcdn.net/jpg/10/17/65/75/360_F_1017657553_BFjfgC9jaR5KFxJKfQZxVySUnYZ211bR.jpg'),
     ('Ice Cream', 60, 'https://t4.ftcdn.net/jpg/08/45/19/79/360_F_845197906_IZjiHv2BJ7duGqAVoqL0f433RlKDxYUY.jpg'),
-    ('Brownie', 80, 'https://recipesblob.oetker.in/assets/9a89b75f976642dcab8ae407e2f4344e/1272x764/chocolate-brownie.webp')
+    ('Brownie', 80, 'https://recipesblob.oetker.in/assets/9a89b75f976642dcab8ae407e2f4344e/1272x764/chocolate-brownie.webp'),('Banana ice cream',90,'https://cdn.loveandlemons.com/wp-content/uploads/2025/06/banana-ice-cream.jpg')
     ");
 }
-
 
 /* ORDERS table */
 mysqli_query($conn, "
 CREATE TABLE IF NOT EXISTS orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     users_id INT NOT NULL,
-    cart_data TEXT NOT NULL,
-    total_price INT NOT NULL,
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    address TEXT NOT NULL,
+    food_id INT NOT NULL,
+    food_name VARCHAR(150) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    quantity INT NOT NULL,
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (users_id) REFERENCES users(users_id)
-)
-");
+    ON DELETE CASCADE
+)");
+
+// feedback table
+mysqli_query($conn, "
+CREATE TABLE IF NOT EXISTS feedback (
+    feedback_id INT AUTO_INCREMENT PRIMARY KEY,
+    users_id INT NOT NULL,
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    rating INT NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (users_id) REFERENCES users(users_id)
+    ON DELETE CASCADE
+)");
+
 ?>
+

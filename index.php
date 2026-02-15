@@ -1,5 +1,3 @@
-
-
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -173,7 +171,7 @@ include 'db.php';
             </li>
         </ul>
     </section>
-    
+
 
     <!-- menu -->
 
@@ -188,7 +186,7 @@ include 'db.php';
     <section class="menu1">
         <?php
         $result = mysqli_query($conn, "SELECT * FROM breakfast");
-    
+
         while ($row = mysqli_fetch_assoc($result)) { ?>
             <div class="card imgrevel">
                 <img src="<?php echo $row['image']; ?>" />
@@ -268,7 +266,7 @@ include 'db.php';
             </div>
         <?php } ?>
     </section>
-    
+
     <form action="order.php" method="post">
         <div id="cart" class="cart hidden">
             <?php if (isset($_SESSION['username'])): ?>
@@ -330,6 +328,7 @@ include 'db.php';
     <!-- contact section -->
 
     <footer id="contact">
+
         <img src="https://media.istockphoto.com/id/1318478175/photo/vegan-raw-vegetables-on-green-wooden-table-background.jpg?s=612x612&w=0&k=20&c=TLk6JMXP1u8Nu9pAvq1LtJ0ae5bCYDIqzK-mPUP-tcc="
             alt="contact background">
 
@@ -349,18 +348,34 @@ include 'db.php';
             </h4>
             <p><ion-icon name="location"></ion-icon>Foodies resto near willingdon collage,sagli</p>
 
-            <input type="text" class="feedback" id="feedback" placeholder="Give feedback/Your message for us">
-            <input type="submit" value="Submit feedback" class="submit-btn">
+            <h2>Give Your Feedback</h2>
 
+            <form action="feedback.php" method="POST">
+
+                <select name="rating" class="dropdown" required>
+                    <option value="">Select Rating</option>
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="1">⭐</option>
+                </select>
+                <br><br>
+
+                Message:<br>
+                <textarea name="message" class="textarea" rows="5" cols="40" required></textarea>
+                <br><br>
+
+                <button type="submit">Submit Feedback</button>
+            </form>
         </div>
         <div class="div3 imgrevel">
-            <ion-icon name="logo-instagram"></ion-icon>
-            <ion-icon name="logo-facebook"></ion-icon>
-            <ion-icon name="logo-twitter"></ion-icon>
-            <ion-icon name="logo-youtube"></ion-icon>
-            <ion-icon name="locate-outline"></ion-icon>
+            <a href=""><ion-icon name="logo-instagram"></ion-icon></a>
+            <a href=""><ion-icon name="logo-facebook"></ion-icon></a>
+            <a href=""><ion-icon name="logo-twitter"></ion-icon></a>
+            <a href=""><ion-icon name="logo-youtube"></ion-icon></a>
+            <a href=""><ion-icon name="locate-outline"></ion-icon></a>
         </div>
-
     </footer>
 
     <!-- adding exter scripts -->

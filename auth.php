@@ -1,26 +1,27 @@
- <?php
-    session_start();
-    include "db.php";
 
-    if (isset($_POST['adlogin'])) {
+<?php
+session_start();
+include "db.php";
 
-        $email = $_POST['ademail'];
-        $password = $_POST['adpassword'];
+if (isset($_POST['adlogin'])) {
 
-        $sql = "SELECT * FROM admin WHERE ademail='$email' AND password='$password'";
-        $result = mysqli_query($conn, $sql);
+    $email = $_POST['ademail'];
+    $password = $_POST['adpassword'];
 
-        if (!$result) {
-            die("Query Failed: " . mysqli_error($conn));
-        }
+    $sql = "SELECT * FROM admin WHERE ademail='$email' AND password='$password'";
+    $result = mysqli_query($conn, $sql);
 
-        if (mysqli_num_rows($result) == 1) {
-            $row = mysqli_fetch_assoc($result);
-            $_SESSION['username'] = $row['adusername'];
-            header("Location: admindash.php");
-            exit();
-        }
-        echo "<script>window.alert('Enter correct admin details');</script>";
-        echo "<script>window.location.href = 'index.php'</script>;";
+    if (!$result) {
+        die("Query Failed: " . mysqli_error($conn));
     }
-    ?>
+
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['username'] = $row['adusername'];
+        header("Location: admindash.php");
+        exit();
+    }
+    echo "<script>window.alert('Enter correct admin details');</script>";
+    echo "<script>window.location.href = 'index.php'</script>;";
+}
+?>

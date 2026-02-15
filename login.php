@@ -21,7 +21,7 @@ if (isset($_POST['login'])) {
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
         $_SESSION['users_id'] = $row['users_id'];
-        $_SESSION['username'] = $row['username'];   
+        $_SESSION['username'] = $row['username'];
         header("Location: index.php");
         exit();
     } else {
@@ -29,4 +29,3 @@ if (isset($_POST['login'])) {
         echo "<script>window.location.href = 'index.php'</script>;";
     }
 }
-?>

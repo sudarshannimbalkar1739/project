@@ -31,7 +31,7 @@ include 'db.php';
                 <a href="#additem">add items</a>
                 <a href="#showitems">items</a>
                 <a href="#showusr">Show users info</a>
-                
+
             </nav>
         </div>
     </header>
@@ -178,6 +178,29 @@ include 'db.php';
                     </button>
                 </form>
             </div>
+        <?php } ?>
+    </section>
+
+    <section>
+        <?php
+        $result = mysqli_query($conn, "SELECT * FROM feedback ORDER BY feedback_id DESC");
+        ?>
+
+        <h2>All Feedback</h2>
+
+        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+
+            <div style="border:1px solid gray; padding:10px; margin:10px;">
+                <strong><?php echo $row['username']; ?></strong>
+                (<?php echo $row['email']; ?>)
+                <br>
+                Rating: <?php echo $row['rating']; ?>/5
+                <br>
+                Message: <?php echo $row['message']; ?>
+                <br>
+                Date: <?php echo $row['created_at']; ?>
+            </div>
+
         <?php } ?>
     </section>
 

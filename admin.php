@@ -3,7 +3,6 @@ session_start();
 include "db.php";
 
 if (isset($_POST['badd'])) {
-
     $name = $_POST['bname'];
     $price = $_POST['bprice'];
     $image = $_POST['bimage'];
@@ -12,14 +11,12 @@ if (isset($_POST['badd'])) {
 
     if (!$result) {
         die("Query Failed: " . mysqli_error($conn));
-    }
-    else{
+    } else {
         echo "<script>alert('Food item added successfully!');window.location.href = 'admindash.php'</script>;";
     }
 }
 
 if (isset($_POST['dadd'])) {
-
     $name = $_POST['dname'];
     $price = $_POST['dprice'];
     $image = $_POST['dimage'];
@@ -35,7 +32,6 @@ if (isset($_POST['dadd'])) {
 }
 
 if (isset($_POST['ladd'])) {
-
     $name = $_POST['lname'];
     $price = $_POST['lprice'];
     $image = $_POST['limage'];
