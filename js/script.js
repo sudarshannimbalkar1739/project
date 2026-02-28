@@ -15,8 +15,8 @@ window.addEventListener("scroll", () => {
 });
 
 /* ======== Mid animated TEXT ========= */
-const slogans = [   //add slogans here//
-  "hello foodies",
+const slogans = [
+  "Hello foodies!",
   "Delicious moments served fresh",
   "Taste the future of food",
   "Where flavor meets magic",
@@ -65,3 +65,17 @@ changeSlide();
 setInterval(changeSlide, 7000);
 
 
+
+
+/* ======= Smooth reveal fallback ===== */
+const revealItems = document.querySelectorAll(".autoshow, .imgrevel");
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("is-visible");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+revealItems.forEach((item) => revealObserver.observe(item));

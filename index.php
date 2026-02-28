@@ -123,6 +123,8 @@ include 'db.php';
                     <img src="img\bgimg1.jpg" class="img-cover" alt="">
                 </div>
 
+                <p class="hero-badge slider-reveal">Clean, colorful and crafted for food lovers</p>
+
                 <p class="label-2 section-subtitle slider-reveal">
                     Tradational & Hygine
                 </p>
@@ -134,6 +136,8 @@ include 'db.php';
                 <p class="body-2 hero-text slider-reveal">
                     Come with family & feel the joy of mouthwatering food
                 </p>
+
+                <a href="#menu" class="hero-cta slider-reveal">Explore Menu</a>
             </li>
 
             <li class="slider-item" data-hero-slider-item>
